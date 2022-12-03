@@ -1,7 +1,8 @@
 import { Icon } from "solid-heroicons";
-import { bars_4, xCircle, shoppingCart } from "solid-heroicons/solid";
-import { createSignal } from "solid-js";
+import { bars_4, shoppingCart, xMark } from "solid-heroicons/solid";
+import { createEffect, createMemo, createSignal } from "solid-js";
 import { A } from "solid-start";
+import { useCartedProducts } from "~/lib/cart";
 import classnames from "~/lib/classnames";
 
 const ICON_WIDTH = 34;
@@ -14,12 +15,23 @@ const navItems = [
     {
         to: "/about",
         title: "About"
+    },
+    {
+        to: "/contact",
+        title: "Contact"
     }
 ]
 
 
 export default function Navbar() {
-    const [isOpen, setIsOpen] = createSignal(false)
+    const { cartedProducts } = useCartedProducts();
+    const [totalAmountInCart, setTotalAmountInCart] = createSignal(Object.values(cartedProducts()).reduce((acc, amount) => acc + amount, 0), { equals: false });
+    const [isOpen, setIsOpen] = createSignal(false);
+
+    createEffect(() => {
+        // This is not the best solution but it works for now
+        setTotalAmountInCart(Object.values(cartedProducts()).reduce((acc, amount) => acc + amount, 0))
+    })
 
     return (
         <nav class="w-ful bg-primary text-foreground ">
@@ -27,7 +39,7 @@ export default function Navbar() {
                 <div class="flex items-center gap-4">
                     {/* Icon on mobile show more */}
                     <div class="hover:cursor-pointer hover:text-foreground-3 transition-colors sm:hidden" onClick={() => setIsOpen((prev) => !prev)}>
-                        <Icon path={bars_4} width={ICON_WIDTH} />
+                        <Icon path={isOpen() ? xMark :bars_4} width={ICON_WIDTH} />
                     </div>
                     <div class="flex items-center gap-5">
                         <A href="/">
@@ -43,8 +55,14 @@ export default function Navbar() {
                 </div>
 
                 {/* In future make shopping cart a menu pop down */}
-                <A href="/cart">
+                <A href="/cart" class="relative">
                     <Icon path={shoppingCart} width={ICON_WIDTH} />
+                    <div
+                        class={classnames(
+                            "absolute -top-2 -right-2 text-center bg-secondary-1/70 rounded-full w-5 h-5 font-bold",
+                            ["hidden", !totalAmountInCart()]
+                        )}
+                    ><span>{totalAmountInCart()}</span></div>
                 </A>
             </div>
             <div class={classnames(

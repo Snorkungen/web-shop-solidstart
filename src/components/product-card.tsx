@@ -1,4 +1,6 @@
 import { A } from "solid-start";
+import toast from "solid-toast";
+import { addProductToCart } from "~/lib/cart";
 import { Product } from "~/products"
 
 interface Props {
@@ -7,7 +9,10 @@ interface Props {
 
 export default function ProductCard({ product }: Props) {
 
-    const handleAddToCart = () => { }
+    const handleAddToCart = () => {
+        addProductToCart(product.id);
+        toast.success(`${product.title} Added to cart!`)
+    }
 
     const href = `/products/${product.id}`
 

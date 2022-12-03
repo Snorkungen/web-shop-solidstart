@@ -12,6 +12,7 @@ import {
   Scripts,
   Title,
 } from "solid-start";
+import { Toaster } from "solid-toast";
 import Navbar from "./components/navbar";
 import PageWrapper from "./components/page-wrapper";
 import "./root.css";
@@ -33,6 +34,7 @@ export default function Root() {
               <FileRoutes />
             </Routes>
             </PageWrapper>
+            <Toaster />
           </ErrorBoundary>
         </Suspense>
         <Scripts />

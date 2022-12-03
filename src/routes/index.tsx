@@ -1,14 +1,7 @@
-import { createResource, For } from "solid-js";
-import { useRouteData } from "solid-start";
+import { For } from "solid-js";
 import PageContainer from "~/components/page-container";
 import ProductCard from "~/components/product-card";
 import { products } from "~/products";
-
-
-
-export function routeData() {
-  return { products };
-}
 
 export default function Home() {
 
