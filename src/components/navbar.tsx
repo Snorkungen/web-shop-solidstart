@@ -55,14 +55,14 @@ export default function Navbar() {
                 </div>
 
                 {/* In future make shopping cart a menu pop down */}
-                <A href="/cart" class="relative">
+                <A href="/cart" class="relative m-2">
                     <Icon path={shoppingCart} width={ICON_WIDTH} />
                     <div
                         class={classnames(
-                            "absolute -top-2 -right-2 text-center bg-secondary-1/70 rounded-full w-5 h-5 font-bold",
+                            "absolute -top-3 -right-3 text-center bg-secondary rounded-full w-6 h-6 font-bold align-middle font-mono grid place-items-center",
                             ["hidden", !totalAmountInCart()]
                         )}
-                    ><span>{totalAmountInCart()}</span></div>
+                    >{totalAmountInCart()}</div>
                 </A>
             </div>
             <div class={classnames(
