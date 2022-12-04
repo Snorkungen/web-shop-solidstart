@@ -1,4 +1,4 @@
-import { createSignal } from "solid-js";
+import { createEffect, createSignal } from "solid-js";
 import { Product } from "~/products";
 import Store from "./store";
 
@@ -28,8 +28,8 @@ export const removeProductFromCart = (productId: Product["id"], amount = 1) => {
 }
 
 export function useCartedProducts() {
-    const [cartedProducts, setCartedProducts] = createSignal(cartStore.data,{
-        "equals" : false
+    const [cartedProducts, setCartedProducts] = createSignal(cartStore.data, {
+        "equals": false
     });
     cartStore.subscribe(setCartedProducts);
     return { cartedProducts }
