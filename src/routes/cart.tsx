@@ -16,7 +16,7 @@ function createCartedProductsList() {
         }
     });
 }
-
+encodeURIComponent
 export default function Cart() {
     const [cartedProducts, setCartedProducts] = createSignal(createCartedProductsList(), { equals: false })
 
@@ -32,7 +32,7 @@ export default function Cart() {
                     <h3
                     class="font-semibold"
                     >{cartedProducts().reduce((acc, { amount ,price}) => acc + (price * amount), 0)}$</h3>
-                    <button class="p-1 rounded-md border-2 border-foreground hover:border-foreground-3 transition-colors">Checkout</button>
+                    <a class="p-1 rounded-md border-2 border-foreground hover:border-foreground-3 transition-colors" href={`mailto:checkout@example.com?subject=Purchase of products&body=${encodeURIComponent(JSON.stringify(cartedProducts()))}\nSomethin and something else`}>Checkout</a>
                 </div>
             </div>
         </header>
