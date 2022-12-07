@@ -24,22 +24,19 @@ export default function Contact() {
         try {
 
 
-            // let sent = await emailClient.send({
-            //     from: emailSender,
-            //     to: recipients,
-            //     bcc: [{ email: data.email }],
-            //     subject: data.subject,
-            //     text: `
-            //         ${data.email}
+            let sent = await emailClient.send({
+                from: emailSender,
+                to: recipients,
+                bcc: [{ email: data.email }],
+                subject: data.subject,
+                text: `
+                    ${data.email}
 
-            //         _______________________________________________
-            //         ${data.message || "No message."}
-            //     `
-            // });
+                    _______________________________________________
+                    ${data.message || "No message."}
+                `
+            });
 
-            await sleep(2440);
-
-            reject("Message Sent")
 
         } catch (error) {
             reject("Failed sending email.")
