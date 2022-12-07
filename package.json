@@ -17,6 +17,7 @@
   "dependencies": {
     "@solidjs/meta": "^0.28.0",
     "@solidjs/router": "^0.5.0",
+    "mailtrap": "^3.0.1",
     "solid-heroicons": "^3.1.1",
     "solid-js": "^1.6.2",
     "solid-start": "^0.2.0",
